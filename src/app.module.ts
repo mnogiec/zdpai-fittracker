@@ -6,7 +6,9 @@ import { addTransactionalDataSource } from 'typeorm-transactional';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
 import typeormConfig from './config/typeorm';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import typeormConfig from './config/typeorm';
       },
       inject: [ConfigService],
     }),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
