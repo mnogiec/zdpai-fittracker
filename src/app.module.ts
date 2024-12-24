@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import typeormConfig from './config/typeorm';
 import { ExerciseCategoriesModule } from './exerciseCategories/exerciseCategories.module';
+import { ExercisesModule } from './exercises/exercises.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -29,6 +30,7 @@ import { UsersModule } from './users/users.module';
     AuthModule,
     UsersModule,
     ExerciseCategoriesModule,
+    ExercisesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
