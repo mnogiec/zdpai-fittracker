@@ -8,13 +8,13 @@ export class WorkoutDay {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 
-  @Column()
+  @Column({ type: 'timestamptz' })
   date: Date;
 
   @ManyToOne(() => User, (user) => user.id)
