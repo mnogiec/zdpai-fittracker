@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+
+import { Exercise } from './exercise.entity';
 
 @Entity()
 export class User {
@@ -25,4 +27,7 @@ export class User {
 
   @Column({ default: false })
   isAdmin: boolean;
+
+  @OneToMany(() => Exercise, (exercise) => exercise.creator)
+  exercises: Exercise[];
 }
