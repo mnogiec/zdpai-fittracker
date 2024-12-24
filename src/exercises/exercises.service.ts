@@ -4,6 +4,7 @@ import { DeleteResult, FindOptionsWhere, ILike, Repository } from 'typeorm';
 
 import { ExerciseCategoriesService } from '@/exerciseCategories/exerciseCategories.service';
 import { Exercise } from '@/models/exercise.entity';
+import { User } from '@/models/user.entity';
 import { UsersService } from '@/users/users.service';
 
 import { CreateExerciseDto } from './dto/CreateExerciseDto.dto';
@@ -22,29 +23,46 @@ export class ExercisesService {
     return await this.exercisesRepository.findOne({ where, relations: { creator: true } });
   }
 
-  async findAllPublic(searchText?: string): Promise<Exercise[]> {
-    return await this.exercisesRepository.find({
+  async findAllPublic(searchText?: string): Promise<Record<string, Exercise[]>> {
+    const exercises = await this.exercisesRepository.find({
       where: {
         isPrivate: false,
         name: searchText ? ILike(`%${searchText}%`) : undefined,
       },
-    });
-  }
-
-  async findAllPrivate(userId: string, searchText?: string): Promise<Exercise[]> {
-    return await this.exercisesRepository.findBy({
-      isPrivate: true,
-      creator: {
-        id: userId,
+      relations: {
+        category: true,
       },
-      name: searchText ? ILike(`%${searchText}%`) : undefined,
     });
+
+    return await this.groupByCategory(exercises);
   }
 
-  async findAllMine(userId: string): Promise<Exercise[]> {
-    return await this.exercisesRepository.find({
-      where: [{ isPrivate: false }, { isPrivate: true, creator: { id: userId } }],
+  async findAllPrivate(userId: string, searchText?: string): Promise<Record<string, Exercise[]>> {
+    const exercises = await this.exercisesRepository.find({
+      where: {
+        isPrivate: true,
+        creator: {
+          id: userId,
+        },
+        name: searchText ? ILike(`%${searchText}%`) : undefined,
+      },
+      relations: {
+        category: true,
+      },
     });
+
+    return await this.groupByCategory(exercises);
+  }
+
+  async findAllMine(userId: string): Promise<Record<string, Exercise[]>> {
+    const exercises = await this.exercisesRepository.find({
+      where: [{ isPrivate: false }, { isPrivate: true, creator: { id: userId } }],
+      relations: {
+        category: true,
+      },
+    });
+
+    return await this.groupByCategory(exercises);
   }
 
   async create(userId: string, createExerciseDto: CreateExerciseDto): Promise<Exercise> {
@@ -90,7 +108,7 @@ export class ExercisesService {
       throw new NotFoundException('Exercise not found');
     }
 
-    if (!user.isAdmin && exercise.creator.id !== userId) {
+    if (!this.canUserManageExercise(user, exercise)) {
       throw new ForbiddenException('You are not allowed to update this exercise');
     }
 
@@ -110,10 +128,22 @@ export class ExercisesService {
       throw new NotFoundException('Exercise not found');
     }
 
-    if (!user.isAdmin && exercise.creator.id !== userId) {
+    if (!this.canUserManageExercise(user, exercise)) {
       throw new ForbiddenException('You are not allowed to delete this exercise');
     }
 
     return await this.exercisesRepository.delete(id);
+  }
+
+  private canUserManageExercise(user: User, exercise: Exercise): boolean {
+    return user.isAdmin || exercise.creator.id === user.id;
+  }
+
+  private async groupByCategory(exercises: Exercise[]): Promise<Record<string, Exercise[]>> {
+    // eslint-disable-next-line unicorn/no-array-reduce
+    return exercises.reduce((acc, exercise) => {
+      acc[exercise.category.name] = [...(acc[exercise.category.name] || []), exercise];
+      return acc;
+    }, {});
   }
 }
