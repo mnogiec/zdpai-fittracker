@@ -1,6 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 
 import { PublicRoute } from '@/auth/decorators/publicRoute.decorator';
+import { ExerciseCategory } from '@/models/exerciseCategory.entity';
 
 import { ExerciseCategoriesService } from './exerciseCategories.service';
 
@@ -10,7 +11,7 @@ export class exerciseCategoriesController {
 
   @Get()
   @PublicRoute()
-  async findAll() {
+  async findAll(): Promise<ExerciseCategory[]> {
     return await this.exerciseCategoriesService.findAll();
   }
 }

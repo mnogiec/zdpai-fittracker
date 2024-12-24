@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 
 import { ExerciseCategory } from '@/models/exerciseCategory.entity';
 
@@ -11,7 +11,11 @@ export class ExerciseCategoriesService {
     private readonly exerciseCategoriesRepository: Repository<ExerciseCategory>,
   ) {}
 
-  async findAll() {
+  async findAll(): Promise<ExerciseCategory[]> {
     return await this.exerciseCategoriesRepository.find();
+  }
+
+  async findOneBy(where: FindOptionsWhere<ExerciseCategory>): Promise<ExerciseCategory | null> {
+    return await this.exerciseCategoriesRepository.findOneBy(where);
   }
 }
