@@ -1,17 +1,18 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 import { ExerciseCategory } from './exerciseCategory.entity';
 import { User } from './user.entity';
+import { WorkoutExercise } from './workoutExercise.entity';
 
 @Entity()
 export class Exercise {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 
   @Column()
@@ -34,4 +35,7 @@ export class Exercise {
 
   @ManyToOne(() => User, (user) => user.id)
   creator: User;
+
+  @OneToMany(() => WorkoutExercise, (workoutExercise) => workoutExercise.exercise)
+  workoutExercises: WorkoutExercise[];
 }
