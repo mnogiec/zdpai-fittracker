@@ -6,7 +6,7 @@ import { ExerciseCategory } from '@/models/exerciseCategory.entity';
 import { ExerciseCategoriesService } from './exerciseCategories.service';
 
 @Controller('exercise-categories')
-export class exerciseCategoriesController {
+export class ExerciseCategoriesController {
   constructor(private readonly exerciseCategoriesService: ExerciseCategoriesService) {}
 
   @Get()
