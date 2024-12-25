@@ -13,6 +13,7 @@ import typeormConfig from './config/typeorm';
 import { ExerciseCategoriesModule } from './exerciseCategories/exerciseCategories.module';
 import { ExercisesModule } from './exercises/exercises.module';
 import { UsersModule } from './users/users.module';
+import { WorkoutsModule } from './workouts/workouts.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     ExerciseCategoriesModule,
     ExercisesModule,
+    WorkoutsModule,
   ],
   controllers: [AppController],
   providers: [
