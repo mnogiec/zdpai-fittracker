@@ -10,6 +10,7 @@ export class CreateExerciseDto {
 
   @IsNotEmpty()
   @IsNumber()
+  @Transform(({ value }) => Number(value))
   readonly categoryId: number;
 
   @IsOptional()
