@@ -51,11 +51,11 @@ export class WorkoutsService {
       if (!workoutDay) {
         throw new NotFoundException('Workout day not found');
       }
-      return await this.workoutExercisesRepository.save(createWorkoutExerciseDto);
+      return await this.workoutExercisesRepository.save({ ...createWorkoutExerciseDto, workoutDay, exercise });
     }
 
     const workoutDay = await this.workoutDaysRepository.save({ user: { id: userId }, date: new Date() });
-    return await this.workoutExercisesRepository.save({ ...createWorkoutExerciseDto, workoutDay });
+    return await this.workoutExercisesRepository.save({ ...createWorkoutExerciseDto, workoutDay, exercise });
   }
 
   async updateExercise(id: string, userId: string, updateWorkoutExerciseDto: UpdateWorkoutExerciseDto): Promise<WorkoutExercise> {
