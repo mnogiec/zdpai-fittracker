@@ -29,7 +29,14 @@ export class WorkoutsService {
   }
 
   async findAll(userId: string): Promise<WorkoutDay[]> {
-    return await this.workoutDaysRepository.find({ where: { user: { id: userId } } });
+    return await this.workoutDaysRepository.find({
+      where: { user: { id: userId } },
+      relations: {
+        workoutExercises: {
+          exercise: true,
+        },
+      },
+    });
   }
 
   @Transactional()
