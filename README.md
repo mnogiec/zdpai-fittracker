@@ -1,99 +1,107 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# FitTracker
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+"FitTracker" is a platform for tracking your gym workouts and your progress. The application allows you to add a list of your workouts as you go - just hit "Add exercise" and fill the details. We provide a base list of the most common exercises. Don't worry if you are not familiar with any given exercise - we present a video showing you how to perform it right. Don't worry if you can't find your favourite exercise - we provide option to create your own private exercises.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Table of Contents
 
-## Description
+1. [Features](#features)
+2. [Technology Stack](#technology-stack)
+3. [Database Design and Structure](#database-design-and-structure)
+4. [Setup](#setup)
+5. [Usage](#usage)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- **Tracking workouts:** Add exercises and their details to each day you workout.
+- **Learn new exercises:** Each base exercise comes with a description and a video showing you how to perform it.
+- **Create private exercises:** If you didn't find your favourite exercise in the base list, you can create your own private exercise.
+- **User Accounts:** Create your account to track your progress and access your data from anywhere.
+- **Responsive Design:** Application is fully responsive to provide you with the best user experience.
 
-```bash
-$ npm install
-```
+## Technology Stack
 
-## Compile and run the project
+Project is built using a variety of technologies and tools to ensure efficiency, performance, and scalability. Below is a list of the key components:
 
-```bash
-# development
-$ npm run start
+1. **Front-End: (ztpai-fittracker-fe)**
 
-# watch mode
-$ npm run start:dev
+   - React: JavaScript library for building highly interactive user interfaces.
+   - TypeScript: JavaScript superset for static typing.
 
-# production mode
-$ npm run start:prod
-```
+2. **Back-End: (ztpai-fittracker)**
 
-## Run tests
+   - NestJS: Node.js framework for building scalable server-side applications.
+   - PostgreSQL: Robust and scalable database management system.
 
-```bash
-# unit tests
-$ npm run test
+3. **Containerization:**
 
-# e2e tests
-$ npm run test:e2e
+   - Docker: For creating, deploying, and running applications in containers.
+   - Docker Compose: For defining and running multi-container Docker applications.
 
-# test coverage
-$ npm run test:cov
-```
+4. **Version Control:**
 
-## Deployment
+   - Git: For source code management.
+   - GitHub: For hosting the repository and facilitating version control and collaboration.
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## Database Design and Structure
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+The project includes a comprehensive design and structure for the database, ensuring efficient data storage and retrieval. Here are the key components:
 
-```bash
-$ npm install -g mau
-$ mau deploy
-```
+1. **Entity-Relationship Diagram (ERD):**
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+   - The `erd.png` file in the main directory provides a visual representation of the database schema. This diagram is useful for understanding the relationships between different entities in the database.
+   - [View ERD](./erd.png)
 
-## Resources
+2. **Database Schema:**
+   - Database definition together with seed data is located in the `src/migrations` directory. To run all of them, please use `npm run migration:run` command.
 
-Check out a few resources that may come in handy when working with NestJS:
+## Setup
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Project is dockerized for easy setup and deployment. Follow these steps to get the project up and running:
 
-## Support
+1. **Clone the Repository**
+2. **Navigate to the Project Directory**
+3. **Docker Setup:**
+   Ensure Docker and Docker Compose are installed on your system. In the project directory, you'll find Docker configuration files in the `docker/db`, `docker/nginx`, and `docker/php` directories, along with a `Dockerfile` in each.
+4. **Build Docker Images:**
+   `docker-compose build`
+5. **Start Docker Containers:**
+   `docker-compose up`
+6. **Access the Application:**
+   After the containers are up and running, you can access the application through your web browser. By default, the frontend application runs on `http://localhost:5173`.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Usage
 
-## Stay in touch
+### Home Page
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The home page allows to add and manage workouts. It's divided into days, where each day has its separate list of exercises.
+Desktop | Mobile
+:-------------------------:|:-------------------------:
+![Home page](demo_images/home-desktop.png) | ![Home mobile page](demo_images/home-mobile.png)
 
-## License
+### Exercises Base
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This page allows users to browse the base list of exercises. Each exercise comes with a description and a video showing how to perform it. Admins can manage the list of base exercises.
+Desktop | Mobile
+:-------------------------:|:-------------------------:
+![All Announcements View](demo_images/exercises_base-desktop.png) | ![All Announcements View](demo_images/exercises_base-mobile.png)
+
+### Private Exercises
+
+This page allows users to create their own private exercises. These exercises are visible only to the user who created them.
+Desktop | Mobile
+:-------------------------:|:-------------------------:
+![Announcement View](demo_images/private_exercises-desktop.png) | ![Announcement View](demo_images/private_exercises-mobile.png)
+
+### Login
+
+The login page allows users to sign in to their accounts.
+Desktop | Mobile
+:-------------------------:|:-------------------------:
+![Login and Registration View](demo_images/login-desktop.png) | ![Login and Registration View](demo_images/login-mobile.png)
+
+### Registration
+
+The registration page allows new users to create an account.
+Desktop | Mobile
+:-------------------------:|:-------------------------:
+![Profile View](demo_images/registration-desktop.png) | ![Profile View](demo_images/registration-mobile.png)
