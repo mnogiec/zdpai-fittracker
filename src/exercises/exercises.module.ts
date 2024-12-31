@@ -5,12 +5,12 @@ import { ExerciseCategoriesModule } from '@/exerciseCategories/exerciseCategorie
 import { Exercise } from '@/models/exercise.entity';
 import { UsersModule } from '@/users/users.module';
 
-import { exercisesController } from './exercises.controller';
+import { ExercisesController } from './exercises.controller';
 import { ExercisesService } from './exercises.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Exercise]), UsersModule, ExerciseCategoriesModule],
-  controllers: [exercisesController],
+  controllers: [ExercisesController],
   providers: [ExercisesService],
   exports: [ExercisesService],
 })

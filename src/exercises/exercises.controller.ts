@@ -9,7 +9,7 @@ import { UpdateExerciseDto } from './dto/UpdateExerciseDto.dto';
 import { ExercisesService } from './exercises.service';
 
 @Controller('exercises')
-export class exercisesController {
+export class ExercisesController {
   constructor(private readonly exercisesService: ExercisesService) {}
 
   @Get('public')
