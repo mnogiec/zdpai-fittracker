@@ -1,5 +1,6 @@
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { initializeTransactionalContext } from 'typeorm-transactional';
 
 import { AppModule } from './app.module';
@@ -14,6 +15,23 @@ async function bootstrap() {
   app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
   app.useGlobalFilters(new GlobalExceptionsFilter());
+
+  const config = new DocumentBuilder()
+    .setTitle('FitTracker API')
+    .setVersion('1.0')
+    .addSecurity('JWT-auth', {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      name: 'JWT',
+      description: 'Enter JWT token',
+      in: 'header',
+    })
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+
+  SwaggerModule.setup('docs', app, document);
 
   app.enableCors({
     origin: [process.env.WEB_APP_URL],

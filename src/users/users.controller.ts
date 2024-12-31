@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, NotFoundException } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { PublicRoute } from '@/auth/decorators/publicRoute.decorator';
 import { CurrentUser } from '@/common/decorators/currentUser.decorator';
@@ -12,6 +13,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('me')
+  @ApiBearerAuth('JWT-auth')
   async getMe(@CurrentUser('id') currentUserId: string): Promise<User> {
     const user = await this.usersService.findOneBy({ id: currentUserId }, { email: true });
 
