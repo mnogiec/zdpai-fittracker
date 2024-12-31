@@ -64,7 +64,7 @@ export class WorkoutsService {
       throw new NotFoundException('Workout exercise not found');
     }
 
-    if (!this.canManageWorkoutExercise(userId, id)) {
+    if (!(await this.canManageWorkoutExercise(userId, id))) {
       throw new ForbiddenException('You are not allowed to manage this workout exercise');
     }
 
@@ -79,7 +79,7 @@ export class WorkoutsService {
       throw new NotFoundException('Workout exercise not found');
     }
 
-    if (!this.canManageWorkoutExercise(userId, id)) {
+    if (!(await this.canManageWorkoutExercise(userId, id))) {
       throw new ForbiddenException('You are not allowed to manage this workout exercise');
     }
 
