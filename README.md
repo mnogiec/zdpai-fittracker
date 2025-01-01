@@ -59,13 +59,13 @@ The project includes a comprehensive design and structure for the database, ensu
 
 Project is dockerized for easy setup and deployment. Follow these steps to get the project up and running:
 
-1. **Clone the Repository**
-2. **Navigate to the Project Directory**
+1. **Clone the Repositories (both ztpai-fittracker and ztpai-fittracker-fe)**
+2. **Navigate to the Project Directories**
 3. **Docker Setup:**
    Ensure Docker and Docker Compose are installed on your system. In the project directory, you'll find Docker configuration files in the `docker/db`, `docker/nginx`, and `docker/php` directories, along with a `Dockerfile` in each.
-4. **Build Docker Images:**
+4. **Build Docker Images (both directories):**
    `docker-compose build`
-5. **Start Docker Containers:**
+5. **Start Docker Containers (both directories):**
    `docker-compose up`
 6. **Access the Application:**
    After the containers are up and running, you can access the application through your web browser. By default, the frontend application runs on `http://localhost:5173`.
