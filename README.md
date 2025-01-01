@@ -31,6 +31,7 @@ Project is built using a variety of technologies and tools to ensure efficiency,
 
    - NestJS: Node.js framework for building scalable server-side applications.
    - PostgreSQL: Robust and scalable database management system.
+   - Redis: Caching system for storing frequently accessed data in memory.
 
 3. **Containerization:**
 

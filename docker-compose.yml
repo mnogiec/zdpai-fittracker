@@ -10,6 +10,7 @@ services:
       - .env.prod
     depends_on:
       - db
+      - redis
 
   db:
     image: postgres:16
@@ -22,6 +23,14 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    container_name: fittracker-redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
 
   pgadmin:
     image: dpage/pgadmin4
@@ -36,3 +45,4 @@ services:
 
 volumes:
   postgres_data:
+  redis_data:
